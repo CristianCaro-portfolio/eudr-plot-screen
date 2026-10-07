@@ -1,0 +1,25 @@
+# Areas of interest. Each one is a 0.1 x 0.1 degree cell (about 11 km on a side)
+# on the Colombian Amazon deforestation frontier.
+#   train     pixels used to fit the pixel model
+#   eval      plots split into calibration and test
+#   transfer  never seen by the model or the calibration, used as a stress test
+before_year: 2020        # last year before the cut-off (31 Dec 2020)
+after_year: 2025         # most recent year with embeddings and reference labels
+hansen_version: GFC-2025-v1.13
+min_tree_cover: 30       # percent canopy in 2000 to call a pixel forest
+plot_px: 20              # 20 x 20 pixels of 10 m = 4 ha
+min_loss_px: 50          # 0.5 ha, the minimum area in the FAO forest definition
+top_k: 50                # plot score = mean of the top_k pixel probabilities
+alpha: 0.05              # tolerated share of deforested plots that get cleared
+beta: 0.05               # tolerated share of clean plots that get flagged
+confidence: 0.95         # how sure to be that this calibration meets alpha and beta (null = on average)
+cluster_correction: true # shrink the calibration size for the correlation between neighbouring plots
+aois:
+  - {name: guaviare_calamar,   bbox: [-72.4, 2.0, -72.3, 2.1], role: train}
+  - {name: caqueta_chaira,     bbox: [-74.5, 1.1, -74.4, 1.2], role: train}
+  - {name: meta_macarena,      bbox: [-73.7, 2.7, -73.6, 2.8], role: train}
+  - {name: guaviare_miraflores, bbox: [-72.5, 1.8, -72.4, 1.9], role: eval}
+  - {name: meta_tinigua,       bbox: [-74.2, 2.3, -74.1, 2.4], role: eval}
+  - {name: caqueta_solano,     bbox: [-74.6, 0.9, -74.5, 1.0], role: eval}
+  - {name: guaviare_retorno,   bbox: [-72.9, 2.3, -72.8, 2.4], role: eval}
+  - {name: meta_mapiripan,     bbox: [-71.8, 3.2, -71.7, 3.3], role: transfer}

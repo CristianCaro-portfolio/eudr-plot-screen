@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eudr-plot-screen"
+version = "0.1.0"
+description = "Screen farm plots for forest loss after a cut-off date with satellite embeddings and conformal triage"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Cristian Caro" }]
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "pyarrow>=15",
+    "scipy>=1.11",
+    "scikit-learn>=1.4",
+    "rasterio>=1.3",
+    "affine>=2.4",
+    "pyproj>=3.6",
+    "shapely>=2.0",
+    "geopandas>=1.0",
+    "geotessera>=0.11",
+    "lancedb>=0.25",
+    "pystac-client>=0.8",
+    "matplotlib>=3.8",
+    "pyyaml>=6.0",
+    "pydantic>=2.6",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.16,<0.17"]
+
+[project.scripts]
+plotscreen = "plotscreen.cli:app"
+
+[tool.setuptools]
+packages = ["plotscreen"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = [
+    "B008",  # typer declares options as default arguments
+    "B905",  # zip() over arrays of equal length by construction
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore:Tight layout not applied:UserWarning"]

@@ -1,0 +1,15 @@
+# downloaded cubes, labels and the LanceDB store
+data/
+decisions.geojson
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+dist/
+
+.env
+.DS_Store
